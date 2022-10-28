@@ -1,0 +1,12 @@
+.button {
+  border: none;
+}
+
+.button:hover {
+  cursor: pointer;
+}
+
+.button:focus,
+.button:active {
+  outline: none;
+}
