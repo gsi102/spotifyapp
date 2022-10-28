@@ -1,0 +1,86 @@
+.main__right__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(255, 255, 255, 1);
+  width: 100%;
+  height: 150px;
+  background-color: #fcc7b7;
+}
+
+.main__right__header__logo {
+  height: 100%;
+  width: 100px;
+}
+
+.main__right__header__logo__img {
+  display: block;
+  content: url("../../assets/img/logo2.webp");
+  height: 100%;
+}
+
+.main__right__header__text {
+  display: block;
+  padding: 0 50px;
+}
+
+.main__right__header__text > * {
+  display: flex;
+  justify-content: end;
+}
+
+.main__right__header__text__themes {
+  font-size: 1.4rem;
+}
+
+.day,
+.night {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.day:hover,
+.night:hover {
+  cursor: pointer;
+}
+
+.day {
+  background: url("../../assets/img/sun.svg") no-repeat;
+  margin: 0 10px;
+  filter: invert(91%) sepia(69%) saturate(3436%) hue-rotate(349deg)
+    brightness(97%) contrast(108%);
+}
+
+.night {
+  background: url("../../assets/img/moon.svg") no-repeat;
+  margin: 0 0 0 10px;
+  filter: invert(22%) sepia(0%) saturate(1%) hue-rotate(264deg) brightness(92%)
+    contrast(80%);
+}
+
+@media screen and (max-width: 480px) {
+  .main__right__header__logo {
+    display: none;
+  }
+
+  .main__right__header {
+    justify-content: center;
+  }
+
+  .main__right__header__text {
+    padding: 0;
+  }
+
+  .main__right__header__text h1 {
+    font-size: 1.8rem;
+  }
+
+  .main__right__header__text__themes {
+    justify-content: start;
+  }
+
+  .day,
+  .night {
+    margin: 0 10px;
+  }
+}

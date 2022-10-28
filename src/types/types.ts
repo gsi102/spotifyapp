@@ -1,1 +1,1 @@
-export {};
+export type ThemeType = "day" | "night";

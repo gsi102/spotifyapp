@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { THEMES_NAMES } from "../../const/const";
+import { ThemeType } from "../../types/types";
 
 const initialState = {
-  theme: "",
+  theme: THEMES_NAMES.DAY as ThemeType,
 };
 
 export const commonSlice = createSlice({
