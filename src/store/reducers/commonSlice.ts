@@ -2,8 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { THEMES_NAMES } from "../../const/const";
 import { ThemeType } from "../../types/types";
 
+let theme = localStorage.getItem("theme");
+if (theme) theme = JSON.parse(theme);
+else theme = THEMES_NAMES.DAY;
+
 const initialState = {
-  theme: THEMES_NAMES.DAY as ThemeType,
+  theme: theme as ThemeType,
 };
 
 export const commonSlice = createSlice({

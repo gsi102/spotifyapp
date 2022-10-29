@@ -17,6 +17,7 @@ const Header: FC = () => {
   const changeTheme = (theme: string) => {
     if (currentTheme !== theme) {
       dispatch(setTheme({ data: theme }));
+      localStorage.setItem("theme", JSON.stringify(theme));
     }
   };
   return (
@@ -28,7 +29,9 @@ const Header: FC = () => {
         />
       </div>
       <div className={styles.main__right__header__text}>
-        <h1>Your favourite tunes</h1>
+        <p className={styles.main__right__header__header}>
+          Your favourite tunes
+        </p>
         <p className={styles.main__right__header__text__themes}>
           All
           <span className={styles.day} onClick={() => changeTheme(DAY)} />

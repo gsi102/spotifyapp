@@ -1,27 +1,34 @@
 .main__right__content__category {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.main__right__content__category__name {
+.main__right__content__category__top {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.main__right__content__category__top__name {
   color: rgb(88, 80, 214, 0.2);
 }
 
-.main__right__content__category__line {
+.main__right__content__category__top__line {
   background: rgb(88, 80, 214, 0.2);
   flex-grow: 1;
   height: 3px;
   margin: 0 10px;
 }
 
-.main__right__content__category__controls {
+.main__right__content__category__top__controls {
   display: block;
   width: 1rem;
   height: 1rem;
   padding: 0 5px;
 }
 
-.main__right__content__category__controls:hover {
+.main__right__content__category__top__controls:hover {
   cursor: pointer;
 }
 
@@ -30,4 +37,12 @@
 }
 .controlsRight {
   background: url("../../../../assets/img/chevron-right.svg") no-repeat;
+}
+
+.main__right__content__category__data {
+  display: flex;
+  width: 100%;
+  height: 150px;
+  margin: 20px 0;
+  background-color: red;
 }
