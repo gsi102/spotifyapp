@@ -1,10 +1,9 @@
 import React, { FC, useState, useRef } from "react";
 import { useDarkTheme } from "../../../../hooks/useDarkTheme";
 import DataItem from "../DataItem/DataItem";
-import { useAppSelector } from "hooks/useAppSelector";
+import { useAppSelector } from "../../../../hooks/useAppSelector";
 
 import styles from "./Category.module.css";
-import childStyles from "../DataItem/DataItem.module.css";
 
 interface Props {
   categoryName: string;
@@ -28,22 +27,15 @@ const Category: FC<Props> = (props) => {
   ].join(" ");
 
   const items = useAppSelector((state: any) => state.common.show[categoryType]);
-  const [slideAmount, setSlideAmount] = useState(0);
-  const itemRef: any = useRef<Element | null>(null);
-
-  const elWidth = itemRef?.current?.offsetWidth;
-  let elMargin = 0;
-  if (itemRef.current !== null) {
-    const elStyle = window.getComputedStyle(itemRef.current);
-    elMargin = +parseInt(elStyle.getPropertyValue("margin-right"));
-  }
+  const [slideAmount, setSlideAmount] = useState<number>(0);
 
   const slideLeft = () => {
-    setSlideAmount((prev) => prev + elWidth + elMargin);
+    if (slideAmount === 0) return;
+    setSlideAmount((prev) => prev + 100 + 20);
   };
 
   const slideRight = () => {
-    setSlideAmount((prev) => prev - elWidth - elMargin);
+    setSlideAmount((prev) => prev - 100 - 20);
   };
 
   return (
@@ -64,7 +56,7 @@ const Category: FC<Props> = (props) => {
           {items.map((el: any) => {
             return (
               <div key={el.id}>
-                <DataItem item={el} ref={itemRef} />
+                <DataItem item={el} />
               </div>
             );
           })}

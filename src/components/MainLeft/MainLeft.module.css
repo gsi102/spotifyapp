@@ -156,4 +156,9 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  .searchField input {
+    width: 100px;
+    border: 4px solid rgb(88, 80, 214, 1);
+  }
 }

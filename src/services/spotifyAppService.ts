@@ -74,7 +74,7 @@ export const spotifyAppAPI = createApi({
           params: {
             country: "US",
             locale: "en_US",
-            limit: 20,
+            limit: 40,
             offset: 0,
           },
           headers: {

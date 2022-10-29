@@ -9,15 +9,20 @@ import { setSpotifyAuthCode } from "../../helpers/setSpotifyAuthCode";
 import {
   useLazyGetTokenQuery,
   useLazyRefreshTokenQuery,
+  useLazyGetDataQuery,
 } from "../../services/spotifyAppService";
+import { getSpotifyData } from "../../helpers/getSpotifyData";
 
 import styles from "./MainComponent.module.css";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 
 const MainComponent: FC = () => {
   const { dark } = useDarkTheme();
   const location = useLocation();
   const [lazyRefreshToken] = useLazyRefreshTokenQuery();
   const [lazyGetToken] = useLazyGetTokenQuery();
+  const [lazyGetData] = useLazyGetDataQuery();
+  const dispatch = useAppDispatch();
 
   const setSpotifyCode = useCallback(
     async (code: string) => await setSpotifyAuthCode(code),
@@ -39,10 +44,13 @@ const MainComponent: FC = () => {
 
     if (queryParams && codeRE !== null) {
       const code = codeRE[1];
-      Promise.all([
-        receiveTokens(code, lazyGetToken),
-        setSpotifyCode(code),
-      ]).catch((e) => console.error(e));
+      Promise.all([receiveTokens(code, lazyGetToken), setSpotifyCode(code)])
+        .then(() => {
+          return getSpotifyData(lazyGetData, dispatch);
+        })
+        .catch((e) => console.error(e));
+    } else {
+      getSpotifyData(lazyGetData, dispatch).catch((e) => console.error(e));
     }
 
     updateToken(lazyRefreshToken).catch((e) => console.error(e));
