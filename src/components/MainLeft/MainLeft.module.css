@@ -1,4 +1,5 @@
 .main__left {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -36,6 +37,26 @@
 .main__left__menu {
   padding: 0;
   margin: 0;
+}
+
+.searchField {
+  display: none;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  transition: all 0.3s linear;
+  transform: translateY(-100%);
+}
+
+.searchField input {
+  border-radius: 500px;
+  padding: 10px;
+  width: calc(100% - 20px);
+  color: rgb(88, 80, 214, 0.9);
+}
+
+.activeSearch {
+  display: block;
 }
 
 .main__left__menu > li {

@@ -1,0 +1,32 @@
+.main__right__content__category__data__item {
+  display: inline-block;
+  margin: 0 20px 0 0;
+  transition: all 0.3s linear;
+  height: 160px;
+  width: 100px;
+}
+
+.main__right__content__category__data__item:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+
+.main__right__content__category__data__item img {
+  position: relative;
+  height: 100px;
+  width: 100%;
+}
+
+.main__right__content__category__data__item:hover img {
+  box-shadow: 1px 1px 10px rgb(88, 80, 214, 0.5);
+  transition: all 0.3s linear;
+}
+
+.main__right__content__category__data__item p {
+  font-size: 0.9rem;
+  padding: 5px 0;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

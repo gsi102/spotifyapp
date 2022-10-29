@@ -1,9 +1,13 @@
 .input {
-  padding: 10px 15px;
-  border-radius: 20px;
+  outline: none;
   border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 
 .input:focus {
   outline: none;
+  border: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

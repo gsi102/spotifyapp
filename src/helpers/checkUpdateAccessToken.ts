@@ -17,7 +17,6 @@ export async function checkUpdateAccessToken(callback: any) {
     lastTimestamp = Number(lastTimestamp);
     expiresIn = Number(expiresIn);
     now = Number(now);
-
     shouldUpdateToken = Boolean(now - lastTimestamp >= expiresIn * 1000);
   }
 
@@ -26,6 +25,7 @@ export async function checkUpdateAccessToken(callback: any) {
     let refreshToken = localStorage.getItem("refresh_token");
     if (refreshToken) {
       refreshToken = JSON.parse(refreshToken);
+
       // @ts-ignore
       response = await updateAccessToken(refreshToken, callback).catch(
         (e: any) => console.error(e)

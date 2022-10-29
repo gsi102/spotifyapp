@@ -53,7 +53,6 @@ export const spotifyAppAPI = createApi({
           grant_type: "refresh_token",
           refresh_token: refreshToken,
         };
-
         return {
           url: `${SPOTIFY_LOGIN_URL}/api/token`,
           method: "POST",
@@ -70,16 +69,13 @@ export const spotifyAppAPI = createApi({
     getData: builder.query<any, any>({
       query: ({ accessToken, type }) => {
         return {
-          url: `${SPOTIFY_GET_DATA}/browse/categories`,
+          url: `${SPOTIFY_GET_DATA}/${type}`,
           method: "GET",
           params: {
             country: "US",
             locale: "en_US",
             limit: 20,
-            next: `${SPOTIFY_GET_DATA}/me/shows?offset=1&limit=1`,
             offset: 0,
-            previous: `${SPOTIFY_GET_DATA}/me/shows?offset=1&limit=1`,
-            total: 4,
           },
           headers: {
             "Content-type": "application/json",

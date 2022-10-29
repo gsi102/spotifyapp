@@ -1,3 +1,5 @@
+import { setSpotifyAuthCode } from "./setSpotifyAuthCode";
+
 export async function updateAccessToken(refreshToken: string, callback: any) {
   const response = await callback({ refreshToken })
     .unwrap()
@@ -11,6 +13,13 @@ export async function updateAccessToken(refreshToken: string, callback: any) {
       localStorage.setItem("token_type", JSON.stringify(token_type));
       localStorage.setItem("scope", JSON.stringify(scope));
       localStorage.setItem("expires_in", JSON.stringify(expires_in));
+
+      let spotifyCode = localStorage.getItem("spotify_code");
+      if (spotifyCode) {
+        spotifyCode = JSON.parse(spotifyCode);
+        // @ts-ignore
+        setSpotifyAuthCode(spotifyCode);
+      }
     })
     .catch((e: any) => console.error(e));
 
