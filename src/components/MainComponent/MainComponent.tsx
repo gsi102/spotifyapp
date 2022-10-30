@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDarkTheme } from "../../hooks/useDarkTheme";
 import MainLeft from "../MainLeft/MainLeft";
 import MainRight from "../MainRight/MainRight";
@@ -19,6 +19,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 const MainComponent: FC = () => {
   const { dark } = useDarkTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   const [lazyRefreshToken] = useLazyRefreshTokenQuery();
   const [lazyGetToken] = useLazyGetTokenQuery();
   const [lazyGetData] = useLazyGetDataQuery();
@@ -50,7 +51,12 @@ const MainComponent: FC = () => {
         .then(() => {
           return getSpotifyData(lazyGetData, dispatch);
         })
-        .catch((e) => console.error(e));
+        .catch((e) => {
+          alert("Something went wrong");
+          navigate("/login");
+          console.error(e);
+          return null;
+        });
     } else {
       getSpotifyData(lazyGetData, dispatch).catch((e) => console.error(e));
     }
