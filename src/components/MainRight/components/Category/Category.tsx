@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef } from "react";
+import React, { FC, useState, useRef, useEffect, useMemo } from "react";
 import { useDarkTheme } from "../../../../hooks/useDarkTheme";
 import DataItem from "../DataItem/DataItem";
 import { useAppSelector } from "../../../../hooks/useAppSelector";
@@ -14,17 +14,21 @@ const Category: FC<Props> = (props) => {
   const { noDark } = useDarkTheme();
 
   const { categoryName, categoryType } = props;
-  const leftControlStyle = [
-    styles.main__right__content__category__top__controls,
-    styles.controlsLeft,
-    noDark,
-  ].join(" ");
+  const leftControlStyle = useMemo(() => {
+    return [
+      styles.main__right__content__category__top__controls,
+      styles.controlsLeft,
+      noDark,
+    ].join(" ");
+  }, [noDark]);
 
-  const rightControlStyle = [
-    styles.main__right__content__category__top__controls,
-    styles.controlsRight,
-    noDark,
-  ].join(" ");
+  const rightControlStyle = useMemo(() => {
+    return [
+      styles.main__right__content__category__top__controls,
+      styles.controlsRight,
+      noDark,
+    ].join(" ");
+  }, [noDark]);
 
   const items = useAppSelector((state: any) => state.common.show[categoryType]);
   const [slideAmount, setSlideAmount] = useState<number>(0);
@@ -37,6 +41,12 @@ const Category: FC<Props> = (props) => {
   const slideRight = () => {
     setSlideAmount((prev) => prev - 100 - 20);
   };
+
+  useEffect(() => {
+    return () => {
+      setSlideAmount(0);
+    };
+  }, [items]);
 
   return (
     <div className={styles.main__right__content__category}>

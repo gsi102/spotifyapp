@@ -42,6 +42,8 @@ const MainComponent: FC = () => {
     const re = /code=([^&]*)/gm;
     const codeRE = re.exec(queryParams);
 
+    updateToken(lazyRefreshToken).catch((e) => console.error(e));
+
     if (queryParams && codeRE !== null) {
       const code = codeRE[1];
       Promise.all([receiveTokens(code, lazyGetToken), setSpotifyCode(code)])
@@ -52,8 +54,6 @@ const MainComponent: FC = () => {
     } else {
       getSpotifyData(lazyGetData, dispatch).catch((e) => console.error(e));
     }
-
-    updateToken(lazyRefreshToken).catch((e) => console.error(e));
   }, []);
 
   return (

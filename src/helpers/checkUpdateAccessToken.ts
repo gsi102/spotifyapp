@@ -13,10 +13,9 @@ export async function checkUpdateAccessToken(callback: any) {
     lastTimestamp = JSON.parse(lastTimestamp);
   }
   if (lastTimestamp && expiresIn) {
-    let now: number | Date = new Date();
+    let now: number = Date.now();
     lastTimestamp = Number(lastTimestamp);
     expiresIn = Number(expiresIn);
-    now = Number(now);
     shouldUpdateToken = Boolean(now - lastTimestamp >= expiresIn * 1000);
   }
 

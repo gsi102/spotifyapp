@@ -18,6 +18,7 @@ const MainLeft: FC = () => {
       setActiveSearch(styles.activeSearch);
     } else {
       setActiveSearch("");
+      dispatch(filterItems({ searchInput: null }));
     }
   };
 
