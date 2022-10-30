@@ -25,41 +25,32 @@ const MainComponent: FC = () => {
   const [lazyGetData] = useLazyGetDataQuery();
   const dispatch = useAppDispatch();
 
-  const setSpotifyCode = useCallback(
-    async (code: string) => await setSpotifyAuthCode(code),
-    []
-  );
-  const receiveTokens = useCallback(
-    async (code: string, callback: any) => await getToken(code, callback),
-    []
-  );
-  const updateToken = useCallback(
-    async (callback: any) => await checkUpdateAccessToken(callback),
-    []
-  );
-
   useEffect(() => {
     const queryParams = location.search;
     const re = /code=([^&]*)/gm;
     const codeRE = re.exec(queryParams);
 
-    updateToken(lazyRefreshToken).catch((e) => console.error(e));
+    (async function () {
+      await checkUpdateAccessToken(lazyRefreshToken).catch((e) =>
+        console.error(e)
+      );
 
-    if (queryParams && codeRE !== null) {
-      const code = codeRE[1];
-      Promise.all([receiveTokens(code, lazyGetToken), setSpotifyCode(code)])
-        .then(() => {
-          return getSpotifyData(lazyGetData, dispatch);
-        })
-        .catch((e) => {
-          alert("Something went wrong");
-          navigate("/login");
-          console.error(e);
-          return null;
-        });
-    } else {
-      getSpotifyData(lazyGetData, dispatch).catch((e) => console.error(e));
-    }
+      if (queryParams && codeRE !== null) {
+        const code = codeRE[1];
+
+        Promise.all([getToken(code, lazyGetToken), setSpotifyAuthCode(code)])
+          .then(() => {
+            return getSpotifyData(lazyGetData, dispatch);
+          })
+          .catch((e) => {
+            alert("Something went wrong");
+            navigate("/login");
+            return console.error(e);
+          });
+      } else {
+        getSpotifyData(lazyGetData, dispatch).catch((e) => console.error(e));
+      }
+    })();
   }, []);
 
   return (
