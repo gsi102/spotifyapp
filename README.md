@@ -6,7 +6,7 @@ Link: https://spotifyapp-97395.web.app
 > The App is in the Development mode on Spotify, which means that I have to add users manually so they can see the result. If you are interested in, please send me an email associated with Spotify account and I will add it in the whitelist.
 
 ## App functionality:
-The app uses Spotify API. When any user logs in his Spotify account a document is created in the Firestore database with a unique id and timestamp field. Keys for access, refresh tokens, timestamp, theme, etc. also are set with values in the **Localstorage**
+The App uses Spotify API. When any user logs in his Spotify account a document is created in the Firestore database with a unique id and timestamp field. Keys for access, refresh tokens, timestamp, theme, etc. also are set with values in the **Localstorage**
 
 Albums, playlists, and categories are fetched from the Spotify API in three blocks:
 - new-releases
