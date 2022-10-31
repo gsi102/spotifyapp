@@ -1,31 +1,29 @@
-Spotify App
 
-Task description:
-Spotify Authentification flow:
--Create an app at https://developer.spotify.com/dashboard/
--Read Spotify API documentation regarding authentification process
-Example of authentification flow (you can make your own simpler flow):
-When a user opens the app show a login button that redirects the user to Spotify
-authorization page. Afterward, this page redirects the user to your
-redirect URL (set in the developer Spotify app settings to your app). The URL will contain
-code.
+# Spotify App
 
-Catch the parameter and store the code in Firestore document associated with the user and use it
-to get the API access token and refresh it further if it expires (use this access token to access
-Spotify API, provide it in Authorization header). Do not ask user to log in again in the next
-sessions.
+> The App is in the Development mode on Spotify, which means that I have to add users manually so they can see the result. If you are interested in, please send me an email associated with Spotify account and I will add it in the whitelist.
 
-App functionality:
-Create a mini Spotify app using Spotify API. When the user logs in to the page create a
-document in Firestore with a unique id with the timestamp field of the user's first log-in
-session, which should be used in further log-in sessions (probably store it in localStorage).
-Fetch albums, playlists, and categories in the US (required, include a country parameter in the
-request URL) from Spotify API (use the following paths):
+## App functionality:
+The app uses Spotify API. When any user logs in his Spotify account a document is created in the Firestore database with a unique id and timestamp field. Keys for access, refresh tokens, timestamp, theme, etc. also are set with values in the **Localstorage**
 
+Albums, playlists, and categories are fetched from the Spotify API in three blocks:
 - new-releases
 - featured-playlists
 - categories
-  Create a responsive layout (should be usable on mobile) of the app (see pictures below).
-- Set night and day mode switch on the sun and moon icons click (find inverts of the
-  colors).
-- The dashboard should include three scrollable (using arrows) blocks with data.
+
+A responsive layout (usable on mobile) functionality:
+- Night and day mode can be switched on the ***sun*** and ***moon*** icons click (by inverting the colors)
+- The dashboard includes three scrollable (using arrows) blocks with data
+- Blocks in the sidebar aren't clickable. Only the ***search block*** has functionality: filtering the data according to its names and the search input string
+- When users click on a song (album, playlist, category, etc) block save the data from this block provided by Spotify API to the Firestore user document in the subcollection ***Favorite***.
+
+# Stack
+
+Front:
+- React
+- Redux
+- RTK Query
+- Typescript
+- Firestore (DB)
+- pure CSS
+
